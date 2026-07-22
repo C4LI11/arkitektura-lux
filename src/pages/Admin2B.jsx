@@ -18,7 +18,7 @@ function Sidebar({ activeTab, setActiveTab, onLogout }) {
     <motion.div 
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
-      className="fixed left-0 top-0 bottom-0 w-80 glass-sidebar z-50 p-12 flex flex-col justify-between"
+      className="fixed left-0 top-0 bottom-0 w-full sm:w-80 glass-sidebar z-50 p-8 sm:p-12 flex flex-col justify-between overflow-y-auto"
     >
       <div className="space-y-24">
         <div className="space-y-6">
@@ -70,7 +70,7 @@ function MessageCard({ message, onDelete }) {
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      className="glass-card p-14 rounded-[2.5rem] border border-white/5 hover:border-[#C5A059]/50 transition-all duration-1000 group relative overflow-hidden shadow-luxury"
+      className="glass-card p-8 sm:p-14 rounded-[1.5rem] sm:rounded-[2.5rem] border border-white/5 hover:border-[#C5A059]/50 transition-all duration-1000 group relative overflow-hidden shadow-luxury"
     >
       <div className="absolute top-0 right-0 p-10 opacity-0 group-hover:opacity-100 transition-all duration-700">
         <button 
@@ -188,10 +188,7 @@ function AddProjectForm({ onProjectAdded }) {
     })
 
     try {
-      const API_BASE =
-        import.meta.env.VITE_API_URL ||
-        "https://arkitektura-backend.onrender.com";
-      const response = await axios.post(`${API_BASE}/projects`, formData)
+      const response = await axios.post(`${API_URL}/projects`, formData)
       
       console.log('Projekti u shtua me sukses:', response.data)
       
@@ -790,10 +787,10 @@ export default function Admin2B() {
 
   return (
     <PageShell>
-      <div className="min-h-screen ml-80">
+      <div className="min-h-screen sm:ml-80">
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} onLogout={handleLogout} />
         
-        <div className="p-20">
+        <div className="p-6 sm:p-12 lg:p-20 pt-28 sm:pt-20">
           <AnimatePresence mode="wait">
             {activeTab === 'messages' && (
               <motion.div 
@@ -808,7 +805,7 @@ export default function Admin2B() {
                     <div className="h-[1px] w-12 bg-[#C5A059]" />
                     <span className="text-[10px] tracking-[0.6em] text-[#C5A059] uppercase font-bold">Inbox</span>
                   </div>
-                  <h3 className="font-serif text-5xl text-[#F5F5F7] tracking-tight">Menaxhoni <span className="text-[#C5A059] italic">Mesazhet</span></h3>
+                  <h3 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#F5F5F7] tracking-tight">Menaxhoni <span className="text-[#C5A059] italic">Mesazhet</span></h3>
                 </div>
 
                 <div className="space-y-8">
@@ -816,7 +813,7 @@ export default function Admin2B() {
                     <motion.div 
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      className="glass-card p-20 rounded-[3.5rem] border border-white/5 text-center"
+                      className="glass-card p-10 sm:p-20 rounded-[2rem] sm:rounded-[3.5rem] border border-white/5 text-center"
                     >
                       <span className="text-6xl opacity-20">📭</span>
                       <p className="text-[#A1A1A6] font-light mt-8">Asnjë mesazh i ri</p>
@@ -847,7 +844,7 @@ export default function Admin2B() {
                     <div className="h-[1px] w-12 bg-[#C5A059]" />
                     <span className="text-[10px] tracking-[0.6em] text-[#C5A059] uppercase font-bold">Arkivi</span>
                   </div>
-                  <h3 className="font-serif text-5xl text-[#F5F5F7] tracking-tight">Menaxhoni <span className="text-[#C5A059] italic">Portofolin</span></h3>
+                  <h3 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#F5F5F7] tracking-tight">Menaxhoni <span className="text-[#C5A059] italic">Portofolin</span></h3>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

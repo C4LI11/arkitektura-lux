@@ -1,4 +1,4 @@
-export const API_URL = "https://arkitektura-backend.onrender.com";
+export const API_URL = "https://arkitektura-backend.onrender.com/api";
 
 // --- DATA SOURCE CONFIGURATION ---
 // We are now strictly using the PERN stack (PostgreSQL, Express, React, Node).
