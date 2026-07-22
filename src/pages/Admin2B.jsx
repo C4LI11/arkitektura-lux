@@ -6,7 +6,7 @@ import { getAdminMessages, deleteAdminMessage, loginAdmin, getProjects, deleteAd
 import * as dataStore from '../services/dataStore.js'
 import { API_URL } from '../services/dataStore.js'
 
-function Sidebar({ activeTab, setActiveTab, onLogout }) {
+function Sidebar({ activeTab, setActiveTab, onLogout, sidebarOpen, setSidebarOpen }) {
   const tabs = [
     { id: 'messages', label: 'Mesazhet', icon: '✉️' },
     { id: 'add-project', label: 'Shto Projekt', icon: '➕' },
@@ -15,51 +15,76 @@ function Sidebar({ activeTab, setActiveTab, onLogout }) {
   ]
 
   return (
-    <motion.div 
-      initial={{ x: -100, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      className="fixed left-0 top-0 bottom-0 w-full sm:w-80 glass-sidebar z-50 p-8 sm:p-12 flex flex-col justify-between overflow-y-auto"
-    >
-      <div className="space-y-24">
-        <div className="space-y-6">
-          <span className="text-[10px] tracking-[0.8em] text-[#C5A059] uppercase font-bold opacity-60">Control Panel</span>
+    <>
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/60 z-40 sm:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+      
+      <motion.div 
+        initial={false}
+        animate={{ 
+          x: sidebarOpen ? 0 : '-100%',
+          opacity: sidebarOpen ? 1 : 0
+        }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed left-0 top-0 bottom-0 w-72 sm:w-80 glass-sidebar z-50 p-8 sm:p-12 flex flex-col justify-between overflow-y-auto"
+      >
+        <div className="space-y-24">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] tracking-[0.8em] text-[#C5A059] uppercase font-bold opacity-60">Control Panel</span>
+            <button 
+              onClick={() => setSidebarOpen(false)}
+              className="sm:hidden text-white/40 hover:text-white transition-colors"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <nav className="space-y-6 sm:space-y-10">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => {
+                  setActiveTab(tab.id)
+                  setSidebarOpen(false)
+                }}
+                className={`flex items-center gap-6 sm:gap-8 w-full text-left transition-all duration-700 group relative p-3 sm:p-4 rounded-xl border ${
+                  activeTab === tab.id ? 'text-[#C5A059] border-[#C5A059]/40 bg-[#C5A059]/5' : 'text-[#A1A1A6] hover:text-[#F5F5F7] border-transparent'
+                }`}
+              >
+                <span className={`text-lg sm:text-xl transition-all duration-700 ${activeTab === tab.id ? 'opacity-100 scale-110' : 'opacity-20 group-hover:opacity-40'}`}>
+                  {tab.icon}
+                </span>
+                <span className="text-[11px] sm:text-[12px] tracking-[0.4em] uppercase font-bold">{tab.label}</span>
+                {activeTab === tab.id && (
+                  <motion.div 
+                    layoutId="activeGlow" 
+                    className="absolute -left-2 w-[2px] h-6 bg-[#C5A059] shadow-[0_0_15px_#C5A059]" 
+                  />
+                )}
+              </button>
+            ))}
+          </nav>
         </div>
 
-        <nav className="space-y-10">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-8 w-full text-left transition-all duration-700 group relative p-4 rounded-xl border ${
-                activeTab === tab.id ? 'text-[#C5A059] border-[#C5A059]/40 bg-[#C5A059]/5' : 'text-[#A1A1A6] hover:text-[#F5F5F7] border-transparent'
-              }`}
-            >
-              <span className={`text-xl transition-all duration-700 ${activeTab === tab.id ? 'opacity-100 scale-110' : 'opacity-20 group-hover:opacity-40'}`}>
-                {tab.icon}
-              </span>
-              <span className="text-[12px] tracking-[0.4em] uppercase font-bold">{tab.label}</span>
-              {activeTab === tab.id && (
-                <motion.div 
-                  layoutId="activeGlow" 
-                  className="absolute -left-2 w-[2px] h-6 bg-[#C5A059] shadow-[0_0_15px_#C5A059]" 
-                />
-              )}
-            </button>
-          ))}
-        </nav>
-      </div>
-
-      <div className="space-y-8">
-        <div className="h-[1px] w-full bg-white/5" />
-        <button 
-          onClick={onLogout}
-          className="flex items-center gap-6 text-[#A1A1A6] hover:text-red-500 transition-all duration-700 group"
-        >
-          <span className="text-[10px] tracking-[0.5em] uppercase font-bold">Sign Out</span>
-          <div className="h-[1px] w-12 bg-white/5 group-hover:bg-red-500/20 transition-all duration-700" />
-        </button>
-      </div>
-    </motion.div>
+        <div className="space-y-6 sm:space-y-8">
+          <div className="h-[1px] w-full bg-white/5" />
+          <button 
+            onClick={onLogout}
+            className="flex items-center gap-6 text-[#A1A1A6] hover:text-red-500 transition-all duration-700 group"
+          >
+            <span className="text-[10px] tracking-[0.5em] uppercase font-bold">Sign Out</span>
+            <div className="h-[1px] w-12 bg-white/5 group-hover:bg-red-500/20 transition-all duration-700" />
+          </button>
+        </div>
+      </motion.div>
+    </>
   )
 }
 
@@ -213,19 +238,19 @@ function AddProjectForm({ onProjectAdded }) {
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="p-12 rounded-3xl border border-[#C5A059]/20 bg-[#0A0A0B] shadow-lg transition-all duration-1000 relative overflow-hidden"
+      className="p-6 sm:p-8 lg:p-12 rounded-2xl sm:rounded-3xl border border-[#C5A059]/20 bg-[#0A0A0B] shadow-lg transition-all duration-1000 relative overflow-hidden"
     >
-      <div className="mb-12 space-y-4">
+      <div className="mb-8 sm:mb-12 space-y-4">
         <div className="flex items-center gap-4">
-          <div className="h-[1px] w-10 bg-[#C5A059]" />
-          <span className="text-[10px] tracking-[0.6em] text-[#C5A059] uppercase font-bold">New Creation</span>
+          <div className="h-[1px] w-8 sm:w-10 bg-[#C5A059]" />
+          <span className="text-[9px] sm:text-[10px] tracking-[0.6em] text-[#C5A059] uppercase font-bold">New Creation</span>
         </div>
-        <h3 className="font-serif text-4xl text-[#F5F5F7] tracking-tight">Arkivoni një <span className="text-[#C5A059] italic">Vepër</span></h3>
+        <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl text-[#F5F5F7] tracking-tight">Arkivoni një <span className="text-[#C5A059] italic">Vepër</span></h3>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-3">
+      <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          <div className="space-y-2 sm:space-y-3">
             <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-3">Titulli i Projektit</label>
             <input 
               className={inputClass} 
@@ -235,7 +260,7 @@ function AddProjectForm({ onProjectAdded }) {
               required 
             />
           </div>
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-3">Kategoria</label>
             <input 
               className={inputClass} 
@@ -245,7 +270,7 @@ function AddProjectForm({ onProjectAdded }) {
               required 
             />
           </div>
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-3">Ngarko Imazhin (Lokal)</label>
             <div className="relative group">
               <input 
@@ -267,26 +292,26 @@ function AddProjectForm({ onProjectAdded }) {
               </label>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-4">
-            <div className="space-y-3">
+          <div className="grid grid-cols-3 gap-3 sm:gap-4">
+            <div className="space-y-2 sm:space-y-3">
               <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-3">Lokacioni</label>
               <input className={inputClass} value={form.location} onChange={e => setForm({...form, location: e.target.value})} />
             </div>
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-3">Viti</label>
               <input type="number" className={inputClass} value={form.year} onChange={e => setForm({...form, year: e.target.value})} />
             </div>
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-3">Sipërfaqja (m²)</label>
               <input type="number" className={inputClass} value={form.area} onChange={e => setForm({...form, area: e.target.value})} />
             </div>
           </div>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-2 sm:space-y-3">
           <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-3">Përshkrimi Arkitektonik</label>
           <textarea 
-            rows={6} 
+            rows={4} 
             className={`${inputClass} resize-none`} 
             placeholder="Përshkruani vizionin, materialet dhe esencën e projektit..."
             value={form.description} 
@@ -295,14 +320,14 @@ function AddProjectForm({ onProjectAdded }) {
           />
         </div>
 
-        <div className="space-y-6 pt-4">
+        <div className="space-y-4 sm:space-y-6 pt-4">
             <div className="flex items-center gap-4">
               <div className="h-[1px] w-6 bg-[#C5A059]" />
               <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-3">Galeria (6 Foto)</label>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {[0,1,2,3,4,5].map((index) => (
-                <div key={index} className="space-y-3">
+                <div key={index} className="space-y-2 sm:space-y-3">
                   <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-3">
                     Foto {index + 1}
                   </label>
@@ -344,17 +369,17 @@ function AddProjectForm({ onProjectAdded }) {
             </div>
           </div>
 
-        <div className="pt-4 flex flex-col gap-5">
+        <div className="pt-4 flex flex-col gap-4 sm:gap-5">
           <AnimatePresence>
             {success && (
               <motion.div 
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="bg-[#C5A059]/10 border border-[#C5A059]/20 rounded-2xl p-5 flex items-center justify-center gap-4"
+                className="bg-[#C5A059]/10 border border-[#C5A059]/20 rounded-2xl p-4 sm:p-5 flex items-center justify-center gap-4"
               >
                 <span className="text-[#C5A059] text-sm">✓</span>
-                <span className="text-[10px] tracking-[0.3em] text-[#C5A059] uppercase font-bold">Projekt u shtua me sukses në arkivë</span>
+                <span className="text-[9px] sm:text-[10px] tracking-[0.3em] text-[#C5A059] uppercase font-bold">Projekt u shtua me sukses në arkivë</span>
               </motion.div>
             )}
           </AnimatePresence>
@@ -362,10 +387,10 @@ function AddProjectForm({ onProjectAdded }) {
           <button 
             type="submit" 
             disabled={loading}
-            className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full bg-[#C5A059] px-10 py-4 transition-all duration-700 hover:bg-[#D5B069] shadow-lg disabled:opacity-50"
+            className="group relative inline-flex items-center justify-center gap-3 overflow-hidden rounded-full bg-[#C5A059] px-8 sm:px-10 py-3 sm:py-4 transition-all duration-700 hover:bg-[#D5B069] shadow-lg disabled:opacity-50"
           >
             <div className="relative z-10 flex items-center justify-center gap-3">
-              <span className="text-[11px] font-bold tracking-[0.6em] text-white uppercase">
+              <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.5em] sm:tracking-[0.6em] text-white uppercase">
                 {loading ? 'Duke u dërguar...' : 'Publiko Projektin'}
               </span>
               {!loading && <div className="h-1.5 w-1.5 rounded-full bg-white/40 group-hover:bg-white transition-all duration-700" />}
@@ -447,34 +472,34 @@ function SettingsForm() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="space-y-12"
+      className="space-y-8 sm:space-y-12"
     >
-      <div className="mb-16 space-y-4">
+      <div className="mb-10 sm:mb-16 space-y-4">
         <div className="flex items-center gap-4">
-          <div className="h-[1px] w-12 bg-[#C5A059]" />
-          <span className="text-[10px] tracking-[0.6em] text-[#C5A059] uppercase font-bold">Cilësimet</span>
+          <div className="h-[1px] w-8 sm:w-12 bg-[#C5A059]" />
+          <span className="text-[9px] sm:text-[10px] tracking-[0.6em] text-[#C5A059] uppercase font-bold">Cilësimet</span>
         </div>
-        <h3 className="font-serif text-5xl text-[#F5F5F7] tracking-tight">Menaxhoni <span className="text-[#C5A059] italic">Llogarinë</span></h3>
+        <h3 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#F5F5F7] tracking-tight">Menaxhoni <span className="text-[#C5A059] italic">Llogarinë</span></h3>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
         {/* SECTION 1: SIGURIA (Security) */}
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
-          className="glass-card p-12 rounded-[2.5rem] shadow-luxury border border-[#C5A059]/30"
+          className="glass-card p-6 sm:p-8 lg:p-12 rounded-[1.5rem] sm:rounded-[2.5rem] shadow-luxury border border-[#C5A059]/30"
         >
-          <div className="mb-10 space-y-3">
+          <div className="mb-6 sm:mb-10 space-y-3">
             <div className="flex items-center gap-4">
-              <div className="h-[1px] w-8 bg-[#C5A059]" />
+              <div className="h-[1px] w-6 sm:w-8 bg-[#C5A059]" />
               <span className="text-[9px] tracking-[0.5em] text-[#C5A059] uppercase font-bold">Siguria</span>
             </div>
-            <h4 className="font-serif text-3xl text-[#F5F5F7] tracking-tight">Siguria e Llogarisë</h4>
+            <h4 className="font-serif text-2xl sm:text-3xl text-[#F5F5F7] tracking-tight">Siguria e Llogarisë</h4>
           </div>
 
-          <form onSubmit={handlePasswordUpdate} className="space-y-8">
-            <div className="space-y-4">
+          <form onSubmit={handlePasswordUpdate} className="space-y-6 sm:space-y-8">
+            <div className="space-y-3 sm:space-y-4">
               <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-4">Fjalëkalimi Aktual</label>
               <input 
                 type="password" 
@@ -485,7 +510,7 @@ function SettingsForm() {
               />
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-4">Fjalëkalimi i Ri</label>
               <input 
                 type="password" 
@@ -496,7 +521,7 @@ function SettingsForm() {
               />
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-4">Konfirmo Fjalëkalimin</label>
               <input 
                 type="password" 
@@ -507,13 +532,13 @@ function SettingsForm() {
               />
             </div>
 
-            <div className="pt-4 flex flex-col gap-6">
+            <div className="pt-4 flex flex-col gap-4 sm:gap-6">
               <button 
                 type="submit" 
-                className="group relative w-full overflow-hidden rounded-full bg-[#C5A059] py-8 transition-all duration-1000 hover:bg-[#D5B069] shadow-2xl"
+                className="group relative w-full overflow-hidden rounded-full bg-[#C5A059] py-6 sm:py-8 transition-all duration-1000 hover:bg-[#D5B069] shadow-2xl"
               >
                 <div className="relative z-10 flex items-center justify-center gap-6">
-                  <span className="text-[11px] font-bold tracking-[0.8em] text-white uppercase">
+                  <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.6em] sm:tracking-[0.8em] text-white uppercase">
                     Përditëso Fjalëkalimin
                   </span>
                   <div className="h-2 w-2 rounded-full bg-white/40 group-hover:bg-white transition-all duration-700" />
@@ -529,18 +554,18 @@ function SettingsForm() {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
-          className="glass-card p-12 rounded-[2.5rem] shadow-luxury border border-[#C5A059]/30"
+          className="glass-card p-6 sm:p-8 lg:p-12 rounded-[1.5rem] sm:rounded-[2.5rem] shadow-luxury border border-[#C5A059]/30"
         >
-          <div className="mb-10 space-y-3">
+          <div className="mb-6 sm:mb-10 space-y-3">
             <div className="flex items-center gap-4">
-              <div className="h-[1px] w-8 bg-[#C5A059]" />
+              <div className="h-[1px] w-6 sm:w-8 bg-[#C5A059]" />
               <span className="text-[9px] tracking-[0.5em] text-[#C5A059] uppercase font-bold">Biznesi</span>
             </div>
-            <h4 className="font-serif text-3xl text-[#F5F5F7] tracking-tight">Informatat e Cali Ing</h4>
+            <h4 className="font-serif text-2xl sm:text-3xl text-[#F5F5F7] tracking-tight">Informatat e Cali Ing</h4>
           </div>
 
-          <form onSubmit={handleSaveBusiness} className="space-y-8">
-            <div className="space-y-4">
+          <form onSubmit={handleSaveBusiness} className="space-y-6 sm:space-y-8">
+            <div className="space-y-3 sm:space-y-4">
               <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-4">Email-i i Biznesit</label>
               <input 
                 type="email" 
@@ -551,7 +576,7 @@ function SettingsForm() {
               />
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-4">Numri i Telefonit</label>
               <input 
                 type="tel" 
@@ -562,7 +587,7 @@ function SettingsForm() {
               />
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-4">Adresa</label>
               <input 
                 type="text" 
@@ -573,7 +598,7 @@ function SettingsForm() {
               />
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4">
               <label className="text-[9px] tracking-[0.4em] text-[#A1A1A6] uppercase font-bold ml-4">Linku i Instagram-it</label>
               <input 
                 type="url" 
@@ -584,17 +609,17 @@ function SettingsForm() {
               />
             </div>
 
-            <div className="pt-4 flex flex-col gap-6">
+            <div className="pt-4 flex flex-col gap-4 sm:gap-6">
               <AnimatePresence>
                 {businessSuccess && (
                   <motion.div 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="bg-[#C5A059]/10 border border-[#C5A059]/20 rounded-2xl p-6 flex items-center justify-center gap-4"
+                    className="bg-[#C5A059]/10 border border-[#C5A059]/20 rounded-2xl p-4 sm:p-6 flex items-center justify-center gap-4"
                   >
                     <span className="text-[#C5A059] text-sm">✓</span>
-                    <span className="text-[10px] tracking-[0.3em] text-[#C5A059] uppercase font-bold">Të dhënat u ruajtën me sukses!</span>
+                    <span className="text-[9px] sm:text-[10px] tracking-[0.3em] text-[#C5A059] uppercase font-bold">Të dhënat u ruajtën me sukses!</span>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -602,10 +627,10 @@ function SettingsForm() {
               <button 
                 type="submit" 
                 disabled={businessLoading}
-                className="group relative w-full overflow-hidden rounded-full bg-[#C5A059] py-8 transition-all duration-1000 hover:bg-[#D5B069] shadow-2xl disabled:opacity-50"
+                className="group relative w-full overflow-hidden rounded-full bg-[#C5A059] py-6 sm:py-8 transition-all duration-1000 hover:bg-[#D5B069] shadow-2xl disabled:opacity-50"
               >
                 <div className="relative z-10 flex items-center justify-center gap-6">
-                  <span className="text-[11px] font-bold tracking-[0.8em] text-white uppercase">
+                  <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.6em] sm:tracking-[0.8em] text-white uppercase">
                     {businessLoading ? 'Duke u ruajtur...' : 'Ruaj Ndryshimet'}
                   </span>
                   {!businessLoading && <div className="h-2 w-2 rounded-full bg-white/40 group-hover:bg-white transition-all duration-700" />}
@@ -623,6 +648,7 @@ function SettingsForm() {
 export default function Admin2B() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [activeTab, setActiveTab] = useState('messages')
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const [messages, setMessages] = useState([])
   const [projects, setProjects] = useState([])
   const [loading, setLoading] = useState(false)
@@ -788,9 +814,25 @@ export default function Admin2B() {
   return (
     <PageShell>
       <div className="min-h-screen sm:ml-80">
-        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} onLogout={handleLogout} />
+        {/* Mobile menu toggle button */}
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="fixed top-6 left-6 z-40 sm:hidden flex flex-col gap-1.5 p-2 bg-[#1A1A1B]/80 backdrop-blur-md rounded-xl border border-white/5"
+        >
+          <div className="h-0.5 w-5 bg-white" />
+          <div className="h-0.5 w-5 bg-white" />
+          <div className="h-0.5 w-5 bg-white" />
+        </button>
         
-        <div className="p-6 sm:p-12 lg:p-20 pt-28 sm:pt-20">
+        <Sidebar 
+          activeTab={activeTab} 
+          setActiveTab={setActiveTab} 
+          onLogout={handleLogout}
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+        />
+        
+        <div className="p-4 sm:p-8 lg:p-12 pt-20 sm:pt-20">
           <AnimatePresence mode="wait">
             {activeTab === 'messages' && (
               <motion.div 
