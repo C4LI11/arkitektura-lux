@@ -77,18 +77,18 @@ export default function Services() {
         transition={{ duration: 1 }}
         className="bg-[#1A1A1B] text-[#F5F5F7] min-h-screen selection:bg-[#C5A059]/30"
       >
-        <div className="mx-auto max-w-[1800px] px-6 pt-40 sm:pt-56 pb-32">
+        <div className="mx-auto max-w-[1800px] px-6 pt-28 sm:pt-40 lg:pt-56 pb-24 sm:pb-32">
           <div className="flex flex-col items-center text-center mb-32">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-8 flex items-center gap-6"
+              className="mb-6 sm:mb-8 flex items-center gap-4 sm:gap-6 max-w-full"
             >
-              <div className="h-[1px] w-12 bg-[#C5A059]" />
-              <span className="text-[10px] tracking-[0.8em] text-[#C5A059] uppercase font-bold">
+              <div className="h-[1px] w-8 sm:w-12 bg-[#C5A059] shrink-0" />
+              <span className="text-[8px] sm:text-[10px] tracking-[0.6em] sm:tracking-[0.8em] text-[#C5A059] uppercase font-bold whitespace-nowrap">
                 Ekspertiza Jonë
               </span>
-              <div className="h-[1px] w-12 bg-[#C5A059]" />
+              <div className="h-[1px] w-8 sm:w-12 bg-[#C5A059] shrink-0" />
             </motion.div>
 
             <motion.h1
@@ -125,7 +125,7 @@ export default function Services() {
                 whileHover={{ scale: 1.02 }}
                 className="group relative flex flex-col"
               >
-                <div className="relative h-[500px] overflow-hidden bg-[#242426] border border-white/5 shadow-luxury transition-all duration-1000 group-hover:shadow-2xl group-hover:border-[#C5A059]/30">
+                <div className="relative h-[300px] sm:h-[400px] lg:h-[500px] overflow-hidden bg-[#242426] border border-white/5 shadow-luxury transition-all duration-1000 group-hover:shadow-2xl group-hover:border-[#C5A059]/30">
                   <img
                     src={service.image}
                     alt={service.title}
@@ -141,7 +141,7 @@ export default function Services() {
                     </div>
 
                     <div className="space-y-6">
-                      <h3 className="font-serif text-3xl text-white uppercase tracking-tight">
+                      <h3 className="font-serif text-2xl sm:text-3xl text-white uppercase tracking-tight">
                         {service.title}
                       </h3>
                       <p className="text-sm font-light leading-relaxed text-[#A1A1A6] line-clamp-3 italic opacity-0 group-hover:opacity-100 transition-all duration-1000 transform translate-y-4 group-hover:translate-y-0">
@@ -158,16 +158,16 @@ export default function Services() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-40 p-20 glass-card rounded-[3rem] text-center border border-white/5 hover:border-[#C5A059]/30 transition-all duration-1000"
+            className="mt-24 sm:mt-40 p-10 sm:p-20 glass-card rounded-[2rem] sm:rounded-[3rem] text-center border border-white/5 hover:border-[#C5A059]/30 transition-all duration-1000"
           >
-            <h2 className="font-serif text-4xl text-white mb-8 uppercase tracking-tighter">
+            <h2 className="font-serif text-2xl sm:text-4xl text-white mb-6 sm:mb-8 uppercase tracking-tighter">
               Gati për të filluar projektin tuaj?
             </h2>
-            <p className="text-[#A1A1A6] mb-12 max-w-xl mx-auto font-light">
+            <p className="text-[#A1A1A6] mb-8 sm:mb-12 max-w-xl mx-auto font-light text-sm sm:text-base">
               Na kontaktoni sot për një konsultim privat rreth vizionit tuaj
               arkitekturor.
             </p>
-            <button className="border border-[#C5A059] bg-transparent text-[#C5A059] px-16 py-6 rounded-full text-[10px] tracking-[0.5em] uppercase font-bold hover:bg-[#C5A059] hover:text-black transition-all duration-700">
+            <button className="border border-[#C5A059] bg-transparent text-[#C5A059] px-10 sm:px-16 py-5 sm:py-6 rounded-full text-[10px] tracking-[0.5em] uppercase font-bold hover:bg-[#C5A059] hover:text-black transition-all duration-700">
               Na Kontaktoni
             </button>
           </motion.div>

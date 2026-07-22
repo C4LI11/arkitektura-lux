@@ -89,7 +89,7 @@ export default function Contact() {
 
   return (
     <PageShell>
-      <section className="relative min-h-screen bg-[#1A1A1B] pt-48 pb-32 sm:pt-72 sm:pb-64 overflow-hidden selection:bg-[#C5A059]/30">
+      <section className="relative min-h-screen bg-[#1A1A1B] pt-28 pb-20 sm:pt-48 sm:pb-32 lg:pt-72 lg:pb-64 overflow-x-hidden overflow-y-visible selection:bg-[#C5A059]/30">
         {/* Background Sophistication */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-[#242426] via-[#1A1A1B] to-[#1A1A1B]" />
@@ -101,7 +101,7 @@ export default function Contact() {
         <div className="absolute bottom-1/4 -right-1/4 h-[800px] w-[800px] rounded-full bg-white/5 blur-[150px] pointer-events-none" />
 
         <div className="relative z-10 mx-auto max-w-[1800px] px-6">
-          <div className="grid grid-cols-1 gap-32 lg:grid-cols-12">
+          <div className="grid grid-cols-1 gap-12 sm:gap-20 lg:gap-32 lg:grid-cols-12">
             
             {/* Left Side: Information */}
             <div className="lg:col-span-5 flex flex-col justify-center">
@@ -117,42 +117,42 @@ export default function Contact() {
                   </span>
                 </div>
                 
-                <h1 className="font-serif text-6xl sm:text-8xl font-light text-[#F5F5F7] uppercase leading-[0.85] tracking-tighter mb-16">
+                <h1 className="font-serif text-4xl sm:text-6xl lg:text-8xl font-light text-[#F5F5F7] uppercase leading-[0.85] tracking-tighter mb-10 sm:mb-16">
                   Le të <span className="text-[#C5A059] italic">Fillojmë</span>.
                 </h1>
                 
-                <p className="mt-16 text-xl font-light leading-relaxed text-[#A1A1A6] max-w-lg font-serif italic">
+                <p className="mt-8 sm:mt-16 text-base sm:text-xl font-light leading-relaxed text-[#A1A1A6] max-w-lg font-serif italic">
                   "Çdo bashkëpunim i suksesshëm fillon me një bisedë të sinqertë. Ne jemi këtu për t'ju dëgjuar dhe për t'i dhënë formë ideve tuaja më guximtare."
                 </p>
 
-                <div className="mt-32 space-y-16">
-                  <div className="group flex items-center gap-10">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/5 bg-white/[0.01] transition-all duration-700 group-hover:border-[#C5A059]/30 group-hover:bg-white/[0.03] shadow-sm">
-                      <span className="text-xl opacity-40 group-hover:opacity-100 transition-opacity">📍</span>
+                <div className="mt-16 sm:mt-32 space-y-8 sm:space-y-16">
+                  <div className="group flex items-center gap-6 sm:gap-10">
+                    <div className="flex h-14 w-14 sm:h-20 sm:w-20 items-center justify-center rounded-full border border-white/5 bg-white/[0.01] transition-all duration-700 group-hover:border-[#C5A059]/30 group-hover:bg-white/[0.03] shadow-sm shrink-0">
+                      <span className="text-base sm:text-xl opacity-40 group-hover:opacity-100 transition-opacity">📍</span>
                     </div>
-                    <div className="space-y-2">
-                      <p className="text-[10px] tracking-[0.4em] text-[#C5A059] uppercase font-bold">Lokacioni</p>
-                      <p className="text-xl font-light text-[#A1A1A6]">{businessInfo.officeAddress}</p>
-                    </div>
-                  </div>
-
-                  <div className="group flex items-center gap-10">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/5 bg-white/[0.01] transition-all duration-700 group-hover:border-[#C5A059]/30 group-hover:bg-white/[0.03] shadow-sm">
-                      <span className="text-xl opacity-40 group-hover:opacity-100 transition-opacity">✉️</span>
-                    </div>
-                    <div className="space-y-2">
-                      <p className="text-[10px] tracking-[0.4em] text-[#C5A059] uppercase font-bold">Email</p>
-                      <p className="text-xl font-light text-[#A1A1A6]">{businessInfo.businessEmail}</p>
+                    <div className="space-y-1 sm:space-y-2 min-w-0">
+                      <p className="text-[9px] sm:text-[10px] tracking-[0.4em] text-[#C5A059] uppercase font-bold">Lokacioni</p>
+                      <p className="text-base sm:text-xl font-light text-[#A1A1A6] break-words">{businessInfo.officeAddress}</p>
                     </div>
                   </div>
 
-                  <div className="group flex items-center gap-10">
-                    <div className="flex h-20 w-20 items-center justify-center rounded-full border border-white/5 bg-white/[0.01] transition-all duration-700 group-hover:border-[#C5A059]/30 group-hover:bg-white/[0.03] shadow-sm">
-                      <span className="text-xl opacity-40 group-hover:opacity-100 transition-opacity">📞</span>
+                  <div className="group flex items-center gap-6 sm:gap-10">
+                    <div className="flex h-14 w-14 sm:h-20 sm:w-20 items-center justify-center rounded-full border border-white/5 bg-white/[0.01] transition-all duration-700 group-hover:border-[#C5A059]/30 group-hover:bg-white/[0.03] shadow-sm shrink-0">
+                      <span className="text-base sm:text-xl opacity-40 group-hover:opacity-100 transition-opacity">✉️</span>
                     </div>
-                    <div className="space-y-2">
-                      <p className="text-[10px] tracking-[0.4em] text-[#C5A059] uppercase font-bold">Telefon</p>
-                      <p className="text-xl font-light text-[#A1A1A6]">{businessInfo.phoneNumber}</p>
+                    <div className="space-y-1 sm:space-y-2 min-w-0">
+                      <p className="text-[9px] sm:text-[10px] tracking-[0.4em] text-[#C5A059] uppercase font-bold">Email</p>
+                      <p className="text-base sm:text-xl font-light text-[#A1A1A6] break-words">{businessInfo.businessEmail}</p>
+                    </div>
+                  </div>
+
+                  <div className="group flex items-center gap-6 sm:gap-10">
+                    <div className="flex h-14 w-14 sm:h-20 sm:w-20 items-center justify-center rounded-full border border-white/5 bg-white/[0.01] transition-all duration-700 group-hover:border-[#C5A059]/30 group-hover:bg-white/[0.03] shadow-sm shrink-0">
+                      <span className="text-base sm:text-xl opacity-40 group-hover:opacity-100 transition-opacity">📞</span>
+                    </div>
+                    <div className="space-y-1 sm:space-y-2 min-w-0">
+                      <p className="text-[9px] sm:text-[10px] tracking-[0.4em] text-[#C5A059] uppercase font-bold">Telefon</p>
+                      <p className="text-base sm:text-xl font-light text-[#A1A1A6] break-words">{businessInfo.phoneNumber}</p>
                     </div>
                   </div>
                 </div>
@@ -166,13 +166,13 @@ export default function Contact() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-                className="relative rounded-[3rem] border border-white/5 bg-white/[0.02] backdrop-blur-3xl p-12 sm:p-24 shadow-luxury overflow-hidden"
+                className="relative rounded-[2rem] sm:rounded-[3rem] border border-white/5 bg-white/[0.02] backdrop-blur-3xl p-8 sm:p-16 lg:p-24 shadow-luxury overflow-hidden"
               >
                 {/* Decorative glow inside card */}
                 <div className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-[#C5A059]/5 blur-[120px] pointer-events-none" />
                 
-                <form onSubmit={handleSubmit} className="relative z-10 space-y-16">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <form onSubmit={handleSubmit} className="relative z-10 space-y-10 sm:space-y-16">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-16">
                     <Field label="Emri i Plotë">
                       <input
                         className={inputClass}
@@ -222,7 +222,7 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="group relative w-full overflow-hidden rounded-full bg-[#C5A059] py-8 text-[11px] font-bold tracking-[0.8em] text-black uppercase transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(197,160,89,0.6)] disabled:opacity-50"
+                      className="group relative w-full overflow-hidden rounded-full bg-[#C5A059] py-6 sm:py-8 text-[10px] sm:text-[11px] font-bold tracking-[0.6em] sm:tracking-[0.8em] text-black uppercase transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(197,160,89,0.6)] disabled:opacity-50"
                     >
                       <span className="relative z-10">
                         {loading ? 'Duke u dërguar...' : 'Dërgo Mesazhin'}
@@ -237,8 +237,8 @@ export default function Contact() {
         </div>
         
         {/* Bottom Decorative Element */}
-        <div className="mt-72 flex flex-col items-center">
-          <div className="h-40 w-[1px] bg-gradient-to-b from-[#C5A059] to-transparent" />
+        <div className="mt-32 sm:mt-48 lg:mt-72 flex flex-col items-center">
+          <div className="h-20 sm:h-40 w-[1px] bg-gradient-to-b from-[#C5A059] to-transparent" />
         </div>
       </section>
     </PageShell>

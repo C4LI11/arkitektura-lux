@@ -81,24 +81,24 @@ export default function Navbar() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 z-[60] bg-[#1a1a1a] flex flex-col items-center justify-center p-12"
+            className="fixed inset-0 z-[60] bg-[#1a1a1a] flex flex-col items-center justify-center p-8 sm:p-12"
           >
             <button
               onClick={() => setOpen(false)}
-              className="absolute top-12 right-12 text-[10px] tracking-[0.4em] text-white/40 uppercase font-black hover:text-white transition-colors"
+              className="absolute top-6 right-6 sm:top-12 sm:right-12 text-[10px] tracking-[0.4em] text-white/40 uppercase font-black hover:text-white transition-colors z-10"
             >
               Close [X]
             </button>
             
-            <div className="flex flex-col items-center gap-12 text-center">
-              <NavLink to="/" onClick={() => setOpen(false)} className="text-5xl font-black text-white hover:text-[#C5A059] transition-colors uppercase tracking-tighter">Home</NavLink>
-              <NavLink to="/about" onClick={() => setOpen(false)} className="text-5xl font-black text-white hover:text-[#C5A059] transition-colors uppercase tracking-tighter">About</NavLink>
-              <NavLink to="/projects" onClick={() => setOpen(false)} className="text-5xl font-black text-white hover:text-[#C5A059] transition-colors uppercase tracking-tighter">Portfolio</NavLink>
-              <NavLink to="/services" onClick={() => setOpen(false)} className="text-5xl font-black text-white hover:text-[#C5A059] transition-colors uppercase tracking-tighter">Sherbimet</NavLink>
-              <NavLink to="/contact" onClick={() => setOpen(false)} className="text-5xl font-black text-white hover:text-[#C5A059] transition-colors uppercase tracking-tighter">Contact</NavLink>
+            <div className="flex flex-col items-center gap-8 sm:gap-12 text-center">
+              <NavLink to="/" onClick={() => setOpen(false)} className="text-3xl sm:text-5xl font-black text-white hover:text-[#C5A059] transition-colors uppercase tracking-tighter">Home</NavLink>
+              <NavLink to="/about" onClick={() => setOpen(false)} className="text-3xl sm:text-5xl font-black text-white hover:text-[#C5A059] transition-colors uppercase tracking-tighter">About</NavLink>
+              <NavLink to="/projects" onClick={() => setOpen(false)} className="text-3xl sm:text-5xl font-black text-white hover:text-[#C5A059] transition-colors uppercase tracking-tighter">Portfolio</NavLink>
+              <NavLink to="/services" onClick={() => setOpen(false)} className="text-3xl sm:text-5xl font-black text-white hover:text-[#C5A059] transition-colors uppercase tracking-tighter">Sherbimet</NavLink>
+              <NavLink to="/contact" onClick={() => setOpen(false)} className="text-3xl sm:text-5xl font-black text-white hover:text-[#C5A059] transition-colors uppercase tracking-tighter">Contact</NavLink>
             </div>
             
-            <div className="absolute bottom-12 text-[10px] tracking-[0.8em] text-white/10 uppercase font-black">
+            <div className="absolute bottom-8 sm:bottom-12 text-[8px] sm:text-[10px] tracking-[0.8em] text-white/10 uppercase font-black">
               2B ING — Architectural Mastery
             </div>
           </motion.div>

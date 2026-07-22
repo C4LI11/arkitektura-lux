@@ -125,7 +125,7 @@ export default function ProjectDetails() {
         className="min-h-[85vh] w-full bg-[#050505]"
       >
         {/* Cinematic Hero Section */}
-        <div className="relative min-h-[85vh] flex items-end">
+        <div className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-[85vh] flex items-end">
           <div className="absolute inset-0">
             <motion.img
               src={project.image_url}
@@ -139,17 +139,17 @@ export default function ProjectDetails() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent rounded-b-[40px] md:rounded-b-[60px]" />
           </div>
 
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-12 md:px-24 lg:px-32 pb-24">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-12 md:px-24 lg:px-32 pb-12 sm:pb-16 lg:pb-24">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
             >
-              <h1 className="font-serif text-6xl md:text-8xl lg:text-9xl font-light text-[#D4AF37] leading-[0.95] tracking-tighter mb-8">
+              <h1 className="font-serif text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-light text-[#D4AF37] leading-[0.95] tracking-tighter mb-6 sm:mb-8">
                 {project.title.toUpperCase()}
               </h1>
 
-              <div className="flex items-center gap-8">
+              <div className="flex flex-wrap items-center gap-4 sm:gap-8">
                 {area !== null && (
                   <div className="flex items-center gap-3">
                     <span className="text-[#F5F5DC]/40 text-[10px] tracking-[0.6em] uppercase font-light">Area</span>
@@ -171,9 +171,9 @@ export default function ProjectDetails() {
         </div>
 
         {/* Floating Description Section */}
-        <div className="max-w-7xl mx-auto px-12 md:px-24 lg:px-32 py-24">
-          <div className="bg-[#050505]/90 backdrop-blur-xl border border-[#F5F5DC]/5 rounded-[40px] p-12 md:p-16">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
+        <div className="max-w-7xl mx-auto px-6 sm:px-12 md:px-24 lg:px-32 py-12 sm:py-16 lg:py-24">
+          <div className="bg-[#050505]/90 backdrop-blur-xl border border-[#F5F5DC]/5 rounded-[24px] sm:rounded-[40px] p-8 sm:p-12 lg:p-16">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 sm:gap-12 lg:gap-16">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -181,7 +181,7 @@ export default function ProjectDetails() {
                 transition={{ duration: 0.8 }}
                 className="lg:col-span-3"
               >
-                <p className="text-[#F5F5DC]/60 text-xl md:text-2xl font-light leading-relaxed">
+                <p className="text-[#F5F5DC]/60 text-base sm:text-xl md:text-2xl font-light leading-relaxed">
                   {project.description}
                 </p>
               </motion.div>
@@ -226,15 +226,15 @@ export default function ProjectDetails() {
         </div>
 
         {/* Advanced Bento Gallery */}
-        <div className="max-w-7xl mx-auto px-12 md:px-24 lg:px-32 pb-32">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="max-w-7xl mx-auto px-6 sm:px-12 md:px-24 lg:px-32 pb-16 sm:pb-24 lg:pb-32">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {/* Featured Photo 1: Main (2x2) */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, delay: 0 }}
-              className="relative group overflow-hidden rounded-[40px] col-span-1 md:col-span-2 lg:col-span-2 row-span-2 aspect-square lg:aspect-auto"
+              className="relative group overflow-hidden rounded-[24px] sm:rounded-[40px] col-span-1 sm:col-span-2 lg:col-span-2 row-span-2 aspect-square lg:aspect-auto"
             >
               <img
                 src={galleryImages[0].src}

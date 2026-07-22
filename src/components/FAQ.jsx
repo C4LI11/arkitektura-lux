@@ -39,7 +39,7 @@ function FAQItem({ faq, index }) {
         onClick={() => setIsOpen(!isOpen)}
         className="flex w-full items-center justify-between py-8 text-left focus:outline-none"
       >
-        <span className="text-xl font-light tracking-wide text-white/80 transition-colors group-hover:text-white sm:text-2xl">
+        <span className="text-base sm:text-xl lg:text-2xl font-light tracking-wide text-white/80 transition-colors group-hover:text-white">
           {faq.question}
         </span>
         <div className="relative flex h-6 w-6 items-center justify-center">
@@ -58,8 +58,7 @@ function FAQItem({ faq, index }) {
         animate={{ height: isOpen ? 'auto' : 0, opacity: isOpen ? 1 : 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className="overflow-hidden"
-      >
-        <p className="pb-8 text-lg font-light leading-relaxed text-white/40 max-w-2xl">
+      >          <p className="pb-6 sm:pb-8 text-base sm:text-lg font-light leading-relaxed text-white/40 max-w-2xl">
           {faq.answer}
         </p>
       </motion.div>
@@ -69,19 +68,19 @@ function FAQItem({ faq, index }) {
 
 export default function FAQ() {
   return (
-    <section className="bg-black py-32 border-t border-white/5">
+    <section className="bg-black py-16 sm:py-24 lg:py-32 border-t border-white/5">
       <div className="mx-auto max-w-4xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-24 text-center"
+          className="mb-12 sm:mb-16 lg:mb-24 text-center"
         >
-          <h2 className="font-sans text-[10px] tracking-[0.6em] text-white/30 uppercase mb-6">Informacione</h2>
-          <h3 className="font-serif text-4xl tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h2 className="font-sans text-[9px] sm:text-[10px] tracking-[0.6em] text-white/30 uppercase mb-4 sm:mb-6">Informacione</h2>
+          <h3 className="font-serif text-3xl sm:text-4xl lg:text-6xl tracking-tight text-white">
             Pyetje të Shpeshta
           </h3>
-          <div className="mx-auto mt-12 h-px w-16 bg-white/10" />
+          <div className="mx-auto mt-8 sm:mt-12 h-px w-12 sm:w-16 bg-white/10" />
         </motion.div>
 
         <div className="space-y-4">

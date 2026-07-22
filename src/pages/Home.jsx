@@ -65,20 +65,20 @@ export default function Home() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: easeOut }}
-                className="mb-12 flex items-center gap-8"
+                className="mb-6 sm:mb-12 flex items-center gap-4 sm:gap-8 max-w-full"
               >
-                <div className="h-[1px] w-20 bg-[#C5A059]" />
-                <span className="text-[12px] tracking-[1em] text-[#C5A059] uppercase font-bold">
+                <div className="h-[1px] w-8 sm:w-20 bg-[#C5A059] shrink-0" />
+                <span className="text-[8px] sm:text-[12px] tracking-[0.6em] sm:tracking-[1em] text-[#C5A059] uppercase font-bold whitespace-nowrap">
                   Moderniteti • Inovacioni • Inxhinieria Precize
                 </span>
-                <div className="h-[1px] w-20 bg-[#C5A059]" />
+                <div className="h-[1px] w-8 sm:w-20 bg-[#C5A059] shrink-0" />
               </motion.div>
 
               <motion.h1
                 initial={{ opacity: 0, scale: 0.9, y: 40 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ duration: 1.5, delay: 0.2, ease: easeOut }}
-                className="font-serif text-[15vw] sm:text-[12vw] font-medium leading-[0.8] tracking-tighter text-[#F5F5F7] uppercase"
+                className="font-serif text-[18vw] sm:text-[12vw] font-medium leading-[0.8] tracking-tighter text-[#F5F5F7] uppercase"
               >
                 Cali <span className="text-[#C5A059] italic">Ing</span>
               </motion.h1>
@@ -87,7 +87,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.8, ease: easeOut }}
-                className="mt-24"
+                className="mt-12 sm:mt-24"
               >
                 <button
                   onClick={() =>
@@ -95,7 +95,7 @@ export default function Home() {
                       .getElementById("about")
                       ?.scrollIntoView({ behavior: "smooth" })
                   }
-                  className="relative overflow-hidden rounded-full border-2 border-[#C5A059] bg-transparent px-20 py-8 text-[12px] font-bold tracking-[0.6em] text-[#C5A059] uppercase transition-all duration-300 hover:bg-[#C5A059] hover:text-black hover:scale-105 hover:shadow-[0_0_20px_rgba(197,160,89,0.6)]"
+                  className="relative overflow-hidden rounded-full border-2 border-[#C5A059] bg-transparent px-10 sm:px-20 py-6 sm:py-8 text-[10px] sm:text-[12px] font-bold tracking-[0.5em] sm:tracking-[0.6em] text-[#C5A059] uppercase transition-all duration-300 hover:bg-[#C5A059] hover:text-black hover:scale-105 hover:shadow-[0_0_20px_rgba(197,160,89,0.6)]"
                 >
                   Eksploro Vizionin
                 </button>
@@ -107,10 +107,10 @@ export default function Home() {
         {/* —— Reveal Section (Biography) —— */}
         <section
           id="about"
-          className="relative py-72 bg-[#1A1A1B] overflow-hidden border-t border-white/5"
+          className="relative py-24 sm:py-48 lg:py-72 bg-[#1A1A1B] overflow-hidden border-t border-white/5"
         >
           <div className="mx-auto max-w-[1600px] px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-20 lg:gap-32 items-center">
               <motion.div
                 initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -136,17 +136,17 @@ export default function Home() {
                 transition={{ duration: 1.5, delay: 0.2, ease: easeOut }}
                 className="space-y-20"
               >
-                <div className="space-y-8">
-                  <span className="text-[10px] tracking-[1em] text-[#C5A059] uppercase font-bold">
+                <div className="space-y-6 sm:space-y-8">
+                  <span className="text-[8px] sm:text-[10px] tracking-[0.8em] sm:tracking-[1em] text-[#C5A059] uppercase font-bold">
                     Moderniteti & Inovacioni
                   </span>
-                  <h2 className="font-serif text-6xl sm:text-8xl font-light text-[#F5F5F7] uppercase leading-[0.85] tracking-tighter">
+                  <h2 className="font-serif text-4xl sm:text-6xl lg:text-8xl font-light text-[#F5F5F7] uppercase leading-[0.85] tracking-tighter">
                     Inxhinieria{" "}
                     <span className="text-[#C5A059] italic">Precize</span>.
                   </h2>
                 </div>
 
-                <div className="space-y-12 text-xl font-light leading-relaxed text-[#A1A1A6]">
+                <div className="space-y-8 sm:space-y-12 text-base sm:text-xl font-light leading-relaxed text-[#A1A1A6]">
                   <p className="max-w-xl font-serif italic text-white/90">
                     Në Cali Ing, arkitektura është një bashkim i guximshëm midis
                     modernitetit radikal dhe inxhinierisë më precize në rajon.
@@ -168,7 +168,7 @@ export default function Home() {
         </section>
 
         {/* —— Testimonials —— */}
-        <section className="bg-[#1A1A1B] py-72 border-t border-white/5">
+        <section className="bg-[#1A1A1B] py-24 sm:py-48 lg:py-72 border-t border-white/5">
           <div className="mx-auto max-w-[1400px] px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 bg-white/5 border-[1px] border-white/5">
               {testimonials.map((t, i) => (
@@ -178,18 +178,18 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.2, duration: 1.2, ease: easeOut }}
-                  className="relative p-24 bg-[#1A1A1B] group hover:bg-white/[0.02] transition-all duration-1000"
+                  className="relative p-8 sm:p-16 lg:p-24 bg-[#1A1A1B] group hover:bg-white/[0.02] transition-all duration-1000"
                 >
-                  <p className="font-serif text-4xl leading-tight text-[#F5F5F7]/80 font-light mb-20 italic text-balance">
+                  <p className="font-serif text-2xl sm:text-3xl lg:text-4xl leading-tight text-[#F5F5F7]/80 font-light mb-10 sm:mb-20 italic text-balance">
                     «{t.quote}»
                   </p>
-                  <div className="flex items-center gap-10">
-                    <div className="h-[1px] w-16 bg-[#C5A059]" />
-                    <div className="space-y-3">
-                      <p className="text-[12px] tracking-[0.5em] text-[#C5A059] uppercase font-bold">
+                  <div className="flex items-center gap-6 sm:gap-10">
+                    <div className="h-[1px] w-10 sm:w-16 bg-[#C5A059]" />
+                    <div className="space-y-1 sm:space-y-3">
+                      <p className="text-[10px] sm:text-[12px] tracking-[0.4em] sm:tracking-[0.5em] text-[#C5A059] uppercase font-bold">
                         {t.author}
                       </p>
-                      <p className="text-[10px] tracking-[0.2em] text-[#A1A1A6] uppercase font-medium">
+                      <p className="text-[8px] sm:text-[10px] tracking-[0.2em] text-[#A1A1A6] uppercase font-medium">
                         {t.role}
                       </p>
                     </div>

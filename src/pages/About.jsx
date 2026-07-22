@@ -24,7 +24,7 @@ export default function About() {
   return (
     <PageShell>
       <section className="min-h-screen bg-[#1A1A1B] text-[#F5F5F7] selection:bg-[#C5A059]/30">
-        <div className="mx-auto max-w-[1800px] px-6 pb-64 pt-40 sm:pt-64">
+        <div className="mx-auto max-w-[1800px] px-6 pb-24 sm:pb-48 lg:pb-64 pt-28 sm:pt-40 lg:pt-64">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-32 items-start">
             {/* Left Side: Cinematic Title */}
             <div className="lg:col-span-7">
@@ -43,7 +43,7 @@ export default function About() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                className="font-serif text-6xl sm:text-[10vw] font-medium text-[#F5F5F7] uppercase leading-[0.85] tracking-tighter"
+                className="font-serif text-[14vw] sm:text-[10vw] font-medium text-[#F5F5F7] uppercase leading-[0.85] tracking-tighter"
               >
                 Cali <span className="text-[#C5A059] italic">Ing</span>
               </motion.h1>
@@ -52,12 +52,12 @@ export default function About() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4, duration: 1 }}
-                className="mt-32 space-y-16 max-w-3xl"
+                className="mt-12 sm:mt-20 lg:mt-32 space-y-10 sm:space-y-16 max-w-3xl"
               >
-                <h2 className="text-4xl font-light leading-tight text-[#F5F5F7]/90 font-serif italic">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light leading-tight text-[#F5F5F7]/90 font-serif italic">
                   "Ne nuk ndërtojmë thjesht struktura; ne skicojmë të ardhmen përmes një harmonie midis dritës, betonit dhe inovacionit."
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-16 text-xl font-light text-[#A1A1A6] leading-relaxed">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 text-base sm:text-lg lg:text-xl font-light text-[#A1A1A6] leading-relaxed">
                   <p>
                     Cali Ing përfaqëson një epokë të re në arkitekturën moderne kosovare. Me një fokus të palëkundur te preciziteti inxhinierik, ne transformojmë konceptet më komplekse në realitete të prekshme që frymëzojnë.
                   </p>
@@ -90,36 +90,36 @@ export default function About() {
           </div>
 
           {/* Pillars Grid */}
-          <div className="mt-72 grid grid-cols-1 md:grid-cols-3 gap-1 bg-white/5 border-[1px] border-white/5">
+          <div className="mt-24 sm:mt-48 lg:mt-72 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 bg-white/5 border-[1px] border-white/5">
             {pillars.map((p, i) => (
               <motion.div
                 key={p.title}
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.2, duration: 1.2 }}
-                className="bg-[#1A1A1B] p-20 group hover:bg-white/[0.02] transition-colors duration-1000"
+                className="bg-[#1A1A1B] p-10 sm:p-16 lg:p-20 group hover:bg-white/[0.02] transition-colors duration-1000"
               >
-                <span className="font-serif text-8xl font-light text-white/5 group-hover:text-[#C5A059]/10 transition-colors duration-1000 mb-16 block">
+                <span className="font-serif text-5xl sm:text-6xl lg:text-8xl font-light text-white/5 group-hover:text-[#C5A059]/10 transition-colors duration-1000 mb-8 sm:mb-16 block">
                   {p.id}
                 </span>
-                <h3 className="font-serif text-3xl font-light text-[#F5F5F7] uppercase tracking-tight mb-8 group-hover:text-[#C5A059] transition-colors duration-700">
+                <h3 className="font-serif text-2xl sm:text-3xl font-light text-[#F5F5F7] uppercase tracking-tight mb-6 sm:mb-8 group-hover:text-[#C5A059] transition-colors duration-700">
                   {p.title}
                 </h3>
-                <p className="text-lg font-light leading-relaxed text-[#A1A1A6] group-hover:text-[#F5F5F7] transition-colors duration-700">
+                <p className="text-base sm:text-lg font-light leading-relaxed text-[#A1A1A6] group-hover:text-[#F5F5F7] transition-colors duration-700">
                   {p.text}
                 </p>
-                <div className="mt-16 h-[1px] w-12 bg-[#C5A059]/20 group-hover:w-24 group-hover:bg-[#C5A059] transition-all duration-1000" />
+                <div className="mt-8 sm:mt-16 h-[1px] w-8 sm:w-12 bg-[#C5A059]/20 group-hover:w-16 sm:group-hover:w-24 group-hover:bg-[#C5A059] transition-all duration-1000" />
               </motion.div>
             ))}
           </div>
 
-          <div className="mt-64 flex flex-col items-center">
-            <div className="h-32 w-[1px] bg-gradient-to-b from-[#C5A059] to-transparent mb-16" />
+          <div className="mt-24 sm:mt-48 lg:mt-64 flex flex-col items-center">
+            <div className="h-16 sm:h-32 w-[1px] bg-gradient-to-b from-[#C5A059] to-transparent mb-10 sm:mb-16" />
             <Link
               to="/contact"
-              className="group relative inline-flex items-center justify-center rounded-full border-2 border-[#C5A059] bg-transparent px-20 py-8 transition-all duration-300 hover:bg-[#C5A059] hover:text-black hover:scale-105 hover:shadow-[0_0_20px_rgba(197,160,89,0.6)]"
+              className="group relative inline-flex items-center justify-center rounded-full border-2 border-[#C5A059] bg-transparent px-10 sm:px-20 py-6 sm:py-8 transition-all duration-300 hover:bg-[#C5A059] hover:text-black hover:scale-105 hover:shadow-[0_0_20px_rgba(197,160,89,0.6)]"
             >
-              <span className="relative z-10 text-[12px] font-bold tracking-[0.6em] text-[#C5A059] uppercase group-hover:text-black transition-colors duration-300">
+              <span className="relative z-10 text-[10px] sm:text-[12px] font-bold tracking-[0.5em] sm:tracking-[0.6em] text-[#C5A059] uppercase group-hover:text-black transition-colors duration-300">
                 Na Kontaktoni
               </span>
             </Link>

@@ -66,7 +66,7 @@ export default function Projects() {
         transition={{ duration: 1, ease: "easeOut" }}
         className="bg-[#1A1A1B] text-[#F5F5F7] min-h-screen selection:bg-[#C5A059]/30"
       >
-        <div className="mx-auto max-w-[1800px] px-6 pt-40 sm:pt-56 pb-32">
+        <div className="mx-auto max-w-[1800px] px-6 pt-28 sm:pt-40 lg:pt-56 pb-24 sm:pb-32">
           <div className="flex flex-col items-center text-center mb-32">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -121,10 +121,9 @@ export default function Projects() {
                   variants={cardVariants}
                   whileHover={{ scale: 1.02 }}
                   className="group relative flex flex-col"
-                >
-                  <Link
+                >                    <Link
                     to={`/projects/${project.id || idx}`}
-                    className="relative h-[400px] overflow-hidden bg-[#242426] border border-white/5 shadow-luxury transition-all duration-1000 group-hover:shadow-2xl group-hover:border-[#C5A059]/30"
+                    className="relative h-[250px] sm:h-[320px] lg:h-[400px] overflow-hidden bg-[#242426] border border-white/5 shadow-luxury transition-all duration-1000 group-hover:shadow-2xl group-hover:border-[#C5A059]/30"
                   >
                     <motion.img
                       src={project.displayImage}
@@ -154,7 +153,7 @@ export default function Projects() {
                     <Link
                       to={`/projects/${project.id || idx}`}
                     >
-                      <h2 className="font-serif text-2xl font-medium text-[#F5F5F7] uppercase tracking-tight transition-colors duration-500 group-hover:text-[#C5A059]">
+                      <h2 className="font-serif text-xl sm:text-2xl font-medium text-[#F5F5F7] uppercase tracking-tight transition-colors duration-500 group-hover:text-[#C5A059]">
                         {project.title}
                       </h2>
                     </Link>
@@ -174,13 +173,13 @@ export default function Projects() {
             </motion.div>
           )}
 
-          <div className="mt-48 flex flex-col items-center">
-            <div className="h-24 w-[1px] bg-gradient-to-b from-[#C5A059] to-transparent mb-12" />
+          <div className="mt-24 sm:mt-48 flex flex-col items-center">
+            <div className="h-16 sm:h-24 w-[1px] bg-gradient-to-b from-[#C5A059] to-transparent mb-8 sm:mb-12" />
             <Link
               to="/contact"
-              className="group relative inline-flex items-center justify-center rounded-full border-2 border-[#C5A059] bg-transparent px-20 py-8 transition-all duration-300 hover:bg-[#C5A059] hover:text-black hover:scale-105 hover:shadow-[0_0_20px_rgba(197,160,89,0.6)]"
+              className="group relative inline-flex items-center justify-center rounded-full border-2 border-[#C5A059] bg-transparent px-10 sm:px-20 py-6 sm:py-8 transition-all duration-300 hover:bg-[#C5A059] hover:text-black hover:scale-105 hover:shadow-[0_0_20px_rgba(197,160,89,0.6)]"
             >
-              <span className="relative z-10 text-[11px] font-bold tracking-[0.6em] text-[#C5A059] uppercase group-hover:text-black transition-colors duration-300">
+              <span className="relative z-10 text-[10px] sm:text-[11px] font-bold tracking-[0.5em] sm:tracking-[0.6em] text-[#C5A059] uppercase group-hover:text-black transition-colors duration-300">
                 Na Kontaktoni
               </span>
             </Link>
