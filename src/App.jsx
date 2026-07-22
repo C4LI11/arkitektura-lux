@@ -45,7 +45,7 @@ export default function App() {
       <Suspense fallback={<LoadingScreen />}>
         <div className="fixed inset-0 z-0 bg-black pointer-events-none" />
 
-        <Navbar />
+        {!location.pathname.startsWith('/admin') && <Navbar />}
 
         <Routes location={location}>
           <Route path="/" element={<Home />} />
@@ -60,7 +60,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
 
-        <Footer />
+        {!location.pathname.startsWith('/admin') && <Footer />}
         <AiChat />
       </Suspense>
     </div>
