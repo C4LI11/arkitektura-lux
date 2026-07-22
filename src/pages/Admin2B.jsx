@@ -31,7 +31,7 @@ function Sidebar({ activeTab, setActiveTab, onLogout, sidebarOpen, setSidebarOpe
           opacity: sidebarOpen ? 1 : 0
         }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed left-0 top-0 bottom-0 w-72 sm:w-80 glass-sidebar z-50 p-8 sm:p-12 flex flex-col justify-between overflow-y-auto"
+        className="fixed left-0 top-0 bottom-0 w-72 sm:w-80 glass-sidebar z-50 p-8 sm:p-12 flex flex-col justify-between overflow-y-auto sm:translate-x-0"
       >
         <div className="space-y-24">
           <div className="flex items-center justify-between">
