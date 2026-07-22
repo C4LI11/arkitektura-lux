@@ -88,7 +88,7 @@ const initializeSettings = async () => {
     console.log('=== Inserting default admin user ===');
     await pool.query(
       'INSERT INTO admin_users (username, password) VALUES ($1, $2)',
-      ['admin', 'admin']
+      ['admin', 'cali123']
     );
     
     console.log('=== Inserting default business settings ===');
@@ -112,8 +112,6 @@ const initializeSettings = async () => {
     console.error(err);
   }
 };
-
-initializeSettings();
 
 // --- Create Projects Table if it doesn't exist ---
 const createProjectsTable = async () => {
@@ -150,7 +148,26 @@ const createProjectsTable = async () => {
   }
 };
 
-createProjectsTable();
+
+// --- Create Messages Table if it doesn't exist ---
+const createMessagesTable = async () => {
+  try {
+    console.log('=== Creating messages table ===');
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS messages (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        message TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    console.log('=== Messages table created or already exists ===');
+  } catch (err) {
+    console.error('=== ERROR creating messages table ===');
+    console.error(err);
+  }
+};
 
 // --- Database Migration for Projects Table ---
 const migrateProjectsTable = async () => {
@@ -189,7 +206,32 @@ const migrateProjectsTable = async () => {
   }
 };
 
-migrateProjectsTable();
+
+// --- Seed default projects if table is empty ---
+const seedDefaultProjects = async () => {
+  try {
+    const result = await pool.query('SELECT COUNT(*)::int AS count FROM projects');
+    const count = result.rows[0].count;
+    if (count === 0) {
+      console.log('=== Seeding 6 default projects ===');
+      await pool.query(`
+        INSERT INTO projects (title, category, image_url, description, location, year, area) VALUES
+        ('VILA LUNA', 'Arkitekturë Rezidenciale', 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80', 'Një simfoni e betonit dhe dritës natyrale në lartësitë e Brezovicës.', 'Brezovicë, Kosovë', '2024', '450 m²'),
+        ('INTERIOR NOIR', 'Dizajn Interieri', 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=80', 'Minimalizëm dramatik ku teksturat e errëta krijojnë një luks të heshtur.', 'London, UK', '2023', '210 m²'),
+        ('KULLA 2B', 'Planifikim Urban', 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80', 'Një ikonë e re në horizontin e Prishtinës, duke ripërcaktuar densitetin urban.', 'Prishtinë, Kosovë', '2025', '12,500 m²'),
+        ('METRO CENTER', 'Menaxhim Projekti', 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1200&q=80', 'Kompleksiteti teknik i kthyer në një strukturë të rrjedhshme tregtare.', 'Tiranë, Shqipëri', '2024', '45,000 m²'),
+        ('AXIS STRUCTURE', 'Konstruksion', 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1200&q=80', 'Sfidat inxhinierike të zgjidhura përmes inovacionit dhe forcës strukturore.', 'Shkup, Maqedoni', '2023', '8,200 m²'),
+        ('STRATEGIC HUB', 'Konsulencë', 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1200&q=80', 'Vizioni strategjik për zhvillimin e qëndrueshëm të hapësirave të punës.', 'Prishtinë, Kosovë', '2024', '3,400 m²')
+      `);
+      console.log('=== 6 default projects seeded successfully ===');
+    } else {
+      console.log('=== Projects table already has data, skipping seed ===');
+    }
+  } catch (err) {
+    console.error('=== ERROR seeding default projects ===');
+    console.error(err);
+  }
+};
 
 // --- API ROUTES ---
 
@@ -440,6 +482,21 @@ app.delete('/api/projects/:id', authenticateToken, async (req, res) => {
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 app.use('/images', express.static(path.resolve(__dirname, '..', 'public', 'images')));
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+// Wrap initialization + listen in an async function to avoid race conditions
+const startServer = async () => {
+  await initializeSettings();
+  await createMessagesTable();
+  await createProjectsTable();
+  await migrateProjectsTable();
+  await seedDefaultProjects();
+  
+  app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+};
+
+startServer().catch(err => {
+  console.error('=== FATAL: Server failed to start ===');
+  console.error(err);
+  process.exit(1);
 });
