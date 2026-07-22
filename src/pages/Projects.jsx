@@ -38,7 +38,9 @@ export default function Projects() {
           
           // If the image is a local path, prepend the API URL if it's not already absolute
           if (displayImage && typeof displayImage === 'string' && displayImage.startsWith('/images/')) {
-            const API_BASE = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:5000';
+            const API_BASE = import.meta.env.VITE_API_URL
+              ? import.meta.env.VITE_API_URL.replace("/api", "")
+              : "https://arkitektura-backend.onrender.com";
             displayImage = `${API_BASE}${displayImage}`;
           }
           

@@ -7,7 +7,9 @@ import { getProjects } from '../services/dataStore.js'
 const PLACEHOLDER_IMAGE = 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2400&q=80'
 
 const getGalleryImages = (project) => {
-  const API_BASE = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:5000'
+  const API_BASE = import.meta.env.VITE_API_URL
+    ? import.meta.env.VITE_API_URL.replace("/api", "")
+    : "https://arkitektura-backend.onrender.com";
   
   const defaults = [
     'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1600&q=80',
@@ -68,7 +70,9 @@ export default function ProjectDetails() {
           let displayImage = p.image_url || p.image || p.imageUrl || PLACEHOLDER_IMAGE;
           
           if (displayImage && typeof displayImage === 'string' && displayImage.startsWith('/images/')) {
-            const API_BASE = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:5000';
+            const API_BASE = import.meta.env.VITE_API_URL
+              ? import.meta.env.VITE_API_URL.replace("/api", "")
+              : "https://arkitektura-backend.onrender.com";
             displayImage = `${API_BASE}${displayImage}`;
           }
           

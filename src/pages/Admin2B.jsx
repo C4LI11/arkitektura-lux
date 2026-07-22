@@ -106,7 +106,7 @@ function MessageCard({ message, onDelete }) {
 }
 
 function ProjectCardAdmin({ project, onDelete }) {
-  const API_BASE = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:5000';
+  const API_BASE = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'https://arkitektura-backend.onrender.com';
   const displayImage = (project.image_url && project.image_url.startsWith('/images/')) 
     ? `${API_BASE}${project.image_url}` 
     : (project.image_url || project.image);
@@ -188,7 +188,9 @@ function AddProjectForm({ onProjectAdded }) {
     })
 
     try {
-      const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'
+      const API_BASE =
+        import.meta.env.VITE_API_URL ||
+        "https://arkitektura-backend.onrender.com";
       const response = await axios.post(`${API_BASE}/projects`, formData)
       
       console.log('Projekti u shtua me sukses:', response.data)
