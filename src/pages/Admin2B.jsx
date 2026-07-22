@@ -24,14 +24,10 @@ function Sidebar({ activeTab, setActiveTab, onLogout, sidebarOpen, setSidebarOpe
         />
       )}
       
-      <motion.div 
-        initial={false}
-        animate={{ 
-          x: sidebarOpen ? 0 : '-100%',
-          opacity: sidebarOpen ? 1 : 0
-        }}
-        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        className="fixed left-0 top-0 bottom-0 w-72 sm:w-80 glass-sidebar z-50 p-8 sm:p-12 flex flex-col justify-between overflow-y-auto sm:translate-x-0"
+      <div 
+        className={`fixed left-0 top-0 bottom-0 w-72 sm:w-80 glass-sidebar z-50 p-8 sm:p-12 flex flex-col justify-between overflow-y-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          sidebarOpen ? 'translate-x-0 opacity-100' : '-translate-x-full opacity-0'
+        } sm:translate-x-0 sm:opacity-100`}
       >
         <div className="space-y-24">
           <div className="flex items-center justify-between">
@@ -83,7 +79,7 @@ function Sidebar({ activeTab, setActiveTab, onLogout, sidebarOpen, setSidebarOpe
             <div className="h-[1px] w-12 bg-white/5 group-hover:bg-red-500/20 transition-all duration-700" />
           </button>
         </div>
-      </motion.div>
+      </div>
     </>
   )
 }
@@ -830,9 +826,7 @@ export default function Admin2B() {
           onLogout={handleLogout}
           sidebarOpen={sidebarOpen}
           setSidebarOpen={setSidebarOpen}
-        />
-        
-        <div className="p-4 sm:p-8 lg:p-12 pt-20 sm:pt-20">
+        />          <div className="p-4 sm:p-8 lg:p-12 pt-20 sm:pt-12">
           <AnimatePresence mode="wait">
             {activeTab === 'messages' && (
               <motion.div 
